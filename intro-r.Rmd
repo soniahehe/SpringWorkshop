@@ -70,6 +70,9 @@ You should have already installed these packages using commands like
 Next, you need to load the packages in your working environment. We do this with
 the `library` function. Note that you only need to **install** packages once, but
 you need to **load** them each time you relaunch RStudio.
+```{r first-code-chunk}
+4+12
+```
 
 ```{r load-packages, message = FALSE}
 library(dplyr)
@@ -220,7 +223,8 @@ an R Markdown document -- this lab! Going forward type the code for the question
 in the code chunks provided in the R Markdown (Rmd) document for the lab, and **Knit**
 the document to see the results.  Knit should produce an HTML file for you that lets you 
 
-### Some Exploration
+### Some Explorati
+#on
 
 Let's start to examine the data a little more closely. 
 To find out more about this dataset, you could use some help.  Tyr typing the name of the dataset with a '?' in front of it. 
@@ -233,7 +237,7 @@ We can access the data in
 a single column of a data frame separately using a command like
 
 ```{r view-clarity}
-
+# how to access certain rows for a column "clarity"
 diamonds$clarity[1:100]
 ```
 
@@ -268,8 +272,8 @@ R has some powerful functions for making graphics. We can create a simple plot
 of the price of diamonds by their weight measured in carats with the command
 
 ```{r plot-price-vs-carat}
-ggplot(data = diamonds, aes(x = carat, y = price)) +
-  geom_point()
+ggplot(data = diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point() 
 ```
 
 Before we review the code for this plot, let's summarize the trends we see in the 
@@ -444,6 +448,7 @@ Let's get the means of the stone prices.
 
 ```{r try-averaging-diamond-prices}
 diamonds %>%
+  group_by(color) %>%
   summarise(mean = mean(price), sd = sd(price), median = median(price))
 ```
 
